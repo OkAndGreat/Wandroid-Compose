@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
+android.buildFeatures.buildConfig = true
+
 android {
     namespace = "com.example.wanandroid_compose"
     compileSdk = 33
@@ -24,6 +26,10 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("Boolean", "DEBUG", "false")
+        }
+        debug {
+            buildConfigField("Boolean", "DEBUG", "true")
         }
     }
     compileOptions {
@@ -71,4 +77,11 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-insets:$accompanist_version")
     implementation("com.google.accompanist:accompanist-insets-ui:$accompanist_version")
+
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    implementation("androidx.startup:startup-runtime:1.1.1")
+
 }
