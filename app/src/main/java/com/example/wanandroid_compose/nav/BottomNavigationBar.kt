@@ -1,9 +1,11 @@
-package com.example.wanandroid_compose.Nav
+package com.example.wanandroid_compose.nav
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -23,10 +25,10 @@ import androidx.compose.ui.unit.sp
  * @date:2023/8/10
  */
 
-private val bottomNavScreenList = listOf(BottomNavScreen.HomeScreen, BottomNavScreen.MineScreen)
+val bottomNavScreenList = listOf(BottomNavScreen.HomeScreen, BottomNavScreen.MineScreen)
 
 @Composable
-fun MainNavBottom(modifier: Modifier = Modifier, onBottomItemClicked: (Int, BottomNavScreen) -> (Unit)) {
+fun MainNavBottom(modifier: Modifier = Modifier, onBottomItemClicked: (Int, BottomNavScreen) -> (Unit), selectedIndex: Int = 0) {
     Row(modifier) {
         bottomNavScreenList.forEachIndexed() { index, screen ->
             MainNavBottomItem(
@@ -35,7 +37,8 @@ fun MainNavBottom(modifier: Modifier = Modifier, onBottomItemClicked: (Int, Bott
                 modifier = Modifier.weight(1F),
                 onItemClicked = {
                     onBottomItemClicked(index, screen)
-                }
+                },
+                isSelected = selectedIndex == index
             )
         }
     }
@@ -49,14 +52,30 @@ fun MainNavBottomItem(
     isSelected: Boolean = false,
     onItemClicked: () -> (Unit) = {}
 ) {
-    Column(modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.SpaceBetween) {
+    Column(
+        modifier
+            .fillMaxWidth()
+            .clickable {
+                onItemClicked.invoke()
+            }
+            .padding(Dp(8F)),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
         Icon(
-            painter = painterResource(id = id), contentDescription = "", tint = if (isSelected) Color.Blue else Color.Black, modifier = Modifier.size(
+            painter = painterResource(id = id), contentDescription = "",
+            tint = if (isSelected) Color.Blue else Color.Black,
+            modifier = Modifier.size(
                 Dp(35F)
             )
         )
-        Text(text = text, textAlign = TextAlign.Center, fontSize = 16.sp)
+        Text(text = text, textAlign = TextAlign.Center, fontSize = 16.sp, color = if (isSelected) Color.Blue else Color.Black)
     }
+}
+
+fun <T : BottomNavScreen> List<T>.findFirstMatchIndex(route: String): Int {
+    this.forEachIndexed { index, t -> if (t.route == route) return index }
+    return 0
 }
 
 @Preview

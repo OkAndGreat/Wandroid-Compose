@@ -1,4 +1,4 @@
-package com.example.wanandroid_compose.Nav
+package com.example.wanandroid_compose.nav
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
