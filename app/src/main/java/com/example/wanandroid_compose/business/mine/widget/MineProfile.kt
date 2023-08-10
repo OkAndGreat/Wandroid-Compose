@@ -2,6 +2,7 @@ package com.example.wanandroid_compose.business.mine.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,7 +31,7 @@ import com.example.wanandroid_compose.R
  */
 
 @Composable
-fun MineProfile(modifier: Modifier = Modifier, isLogin: Boolean, userName: String = "") {
+fun MineProfile(modifier: Modifier = Modifier, isLogin: Boolean, userName: String = "", onAvatarClicked: () -> Unit) {
     Column(
         modifier
             .fillMaxWidth()
@@ -45,6 +46,9 @@ fun MineProfile(modifier: Modifier = Modifier, isLogin: Boolean, userName: Strin
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(top = 50.dp)
+                .clickable {
+                    onAvatarClicked.invoke()
+                }
                 .size(100.dp)
                 .clip(
                     RoundedCornerShape(100.dp)
@@ -81,5 +85,5 @@ fun MineProfile(modifier: Modifier = Modifier, isLogin: Boolean, userName: Strin
 @Preview
 @Composable
 fun MineProfilePreview() {
-    MineProfile(isLogin = false)
+    MineProfile(isLogin = false, onAvatarClicked = {})
 }
