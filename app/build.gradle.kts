@@ -3,8 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-android.buildFeatures.buildConfig = true
-
 android {
     namespace = "com.example.wanandroid_compose"
     compileSdk = 33
@@ -41,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"

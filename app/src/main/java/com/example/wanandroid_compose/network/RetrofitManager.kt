@@ -15,11 +15,14 @@ import java.util.concurrent.TimeUnit
  */
 object RetrofitManager {
     private var retrofit: Retrofit? = null
+    private val api: API? by lazy {
+        retrofit?.create(API::class.java)
+    }
     private val cookieStore = HashMap<String, List<Cookie>>()
 
     private const val CONNECT_TIME_OUT = 10 * 1000L
-    const val READ_TIMEOUT_MILLIS = 15 * 1000L
-    const val WRITE_TIMEOUT_MILLIS = 20 * 1000L
+    private const val READ_TIMEOUT_MILLIS = 15 * 1000L
+    private const val WRITE_TIMEOUT_MILLIS = 20 * 1000L
     private const val PlayAndroid_URL = "https://example.com/"
 
     private val loggerIntercept = HttpLoggingInterceptor { }.apply {
@@ -32,6 +35,10 @@ object RetrofitManager {
 
     fun getRetrofit(): Retrofit? {
         return retrofit
+    }
+
+    fun getApi(): API? {
+        return api
     }
 
     fun initRetrofit() {
