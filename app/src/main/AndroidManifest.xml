@@ -32,6 +32,10 @@
             <meta-data
                 android:name="com.example.wanandroid_compose.initializer.RetrofitInitializer"
                 android:value="androidx.startup" />
+
+            <meta-data
+                android:name="com.example.wanandroid_compose.initializer.DataStoreInitializer"
+                android:value="androidx.startup" />
         </provider>
 
     </application>

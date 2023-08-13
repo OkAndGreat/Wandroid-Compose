@@ -5,12 +5,13 @@ plugins {
 
 android {
     namespace = "com.example.wanandroid_compose"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.wanandroid_compose"
         minSdk = 24
-        targetSdk = 33
+        //noinspection EditedTargetSdkVersion
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -52,6 +53,7 @@ android {
 }
 
 val accompanist_version = "0.16.1"
+val datastore_version = "1.0.0-alpha05"
 
 dependencies {
 
@@ -72,7 +74,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("androidx.navigation:navigation-compose:2.6.0")
+    implementation("androidx.navigation:navigation-compose:2.7.0")
 
     implementation("com.google.accompanist:accompanist-insets:$accompanist_version")
     implementation("com.google.accompanist:accompanist-insets-ui:$accompanist_version")
@@ -84,5 +86,5 @@ dependencies {
     implementation("com.squareup.okhttp3:mockwebserver:3.9.1")
 
     implementation("androidx.startup:startup-runtime:1.1.1")
-
+    implementation("androidx.datastore:datastore-preferences:$datastore_version")
 }

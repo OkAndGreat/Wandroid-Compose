@@ -33,11 +33,7 @@ object RetrofitManager {
         setLevel(HttpLoggingInterceptor.Level.BODY)
     }
 
-    fun getRetrofit(): Retrofit? {
-        return retrofit
-    }
-
-    fun getApi(): API? {
+    fun getRetrofitApi(): API? {
         return api
     }
 

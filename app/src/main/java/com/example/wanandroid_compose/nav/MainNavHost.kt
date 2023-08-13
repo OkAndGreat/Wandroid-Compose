@@ -6,7 +6,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.wanandroid_compose.business.home.HomeScreen
+import com.example.wanandroid_compose.business.home.widget.HomeScreen
 import com.example.wanandroid_compose.business.mine.widget.MineScreen
 
 /**

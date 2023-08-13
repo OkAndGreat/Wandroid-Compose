@@ -1,4 +1,4 @@
-package com.example.wanandroid_compose.business.home
+package com.example.wanandroid_compose.business.home.widget
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

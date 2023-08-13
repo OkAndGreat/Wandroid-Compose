@@ -1,6 +1,7 @@
 package com.example.wanandroid_compose.initializer
 
 import android.content.Context
+import androidx.annotation.Keep
 import androidx.startup.Initializer
 import com.example.wanandroid_compose.network.RetrofitManager
 import com.example.wanandroid_compose.util.LogUtil
@@ -10,6 +11,7 @@ import java.lang.Exception
  * @author:ztaiwang
  * @date:2023/8/11
  */
+@Keep
 class RetrofitInitializer : Initializer<Boolean> {
     companion object {
         const val TAG = "RetrofitInitializer"
