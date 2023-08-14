@@ -25,9 +25,9 @@ open class BaseViewModel : ViewModel() {
      * @param errorBlock 发生异常时的通知
      * @param notifyLoading 通知正在请求 -> true,请求成功或者请求失败 -> false
      */
-    suspend fun <T> requestWithCoroutine(
-        responseBlock: suspend () -> BaseResponse<T>?,
-        errorBlock: (Throwable) -> (Unit),
+    suspend inline fun <reified T> requestWithCoroutine(
+        crossinline responseBlock: () -> BaseResponse<T>?,
+        crossinline errorBlock: (Throwable) -> (Unit),
         notifyLoading: (Boolean) -> Unit
     ): T? {
         var data: T? = null

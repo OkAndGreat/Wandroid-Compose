@@ -1,7 +1,7 @@
 package com.example.wanandroid_compose.network
 
 import com.example.wanandroid_compose.base.BaseResponse
-import com.example.wanandroid_compose.bean.homeArticle.HomeArticle
+import com.example.wanandroid_compose.bean.homeArticle.HomeArticleList
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,5 +17,5 @@ interface API {
      * @return
      */
     @GET("/article/list/{page}/json")
-    fun getHomeArticle(@Path("page") page: Int): Call<BaseResponse<HomeArticle>>?
+    fun getHomeArticle(@Path("page") page: Int): Call<BaseResponse<HomeArticleList>>?
 }

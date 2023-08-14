@@ -1,12 +1,8 @@
 package com.example.wanandroid_compose.business.home.widget
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.wanandroid_compose.business.home.HomeViewModel
 
 /**
  * @author:ztaiwang
@@ -15,12 +11,8 @@ import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun HomeScreen() {
-    Column {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight(), text = "hello this is homescreen", textAlign = TextAlign.Center
-        )
-    }
-
+    val homeViewModel: HomeViewModel = viewModel()
+    homeViewModel.getHomeFeedList()
+    val homeFeedList = homeViewModel.homeFeedList
+    HomeFeedListWidget(homeFeedList = homeFeedList ?: emptyList())
 }

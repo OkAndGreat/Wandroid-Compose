@@ -23,6 +23,7 @@ import com.example.wanandroid_compose.ui.theme.WanandroidComposeTheme
 import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+//TODO:迁移成MVI单向数据流
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -87,4 +87,7 @@ dependencies {
 
     implementation("androidx.startup:startup-runtime:1.1.1")
     implementation("androidx.datastore:datastore-preferences:$datastore_version")
+
+    implementation ("com.google.accompanist:accompanist-pager:0.18.0")
+
 }
