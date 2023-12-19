@@ -28,12 +28,16 @@ import androidx.compose.ui.unit.sp
 val bottomNavScreenList = listOf(BottomNavScreen.HomeScreen, BottomNavScreen.MineScreen)
 
 @Composable
-fun MainNavBottom(modifier: Modifier = Modifier, onBottomItemClicked: (Int, BottomNavScreen) -> (Unit), selectedIndex: Int = 0) {
+fun MainNavBottom(
+    modifier: Modifier = Modifier,
+    onBottomItemClicked: (Int, BottomNavScreen) -> (Unit),
+    selectedIndex: Int = 0
+) {
     Row(modifier) {
         bottomNavScreenList.forEachIndexed() { index, screen ->
             MainNavBottomItem(
-                id = screen.id,
-                text = stringResource(id = screen.resourceId),
+                id = screen.id!!,
+                text = stringResource(id = screen.resourceId!!),
                 modifier = Modifier.weight(1F),
                 onItemClicked = {
                     onBottomItemClicked(index, screen)
@@ -69,7 +73,12 @@ fun MainNavBottomItem(
                 Dp(24F)
             )
         )
-        Text(text = text, textAlign = TextAlign.Center, fontSize = 16.sp, color = if (isSelected) Color.Blue else Color.Black)
+        Text(
+            text = text,
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            color = if (isSelected) Color.Blue else Color.Black
+        )
     }
 }
 
@@ -87,5 +96,8 @@ fun MainNavBottomPreview() {
 @Preview
 @Composable
 fun MainNavBottomItemPreview() {
-    MainNavBottomItem(id = bottomNavScreenList[0].id, text = stringResource(id = bottomNavScreenList[0].resourceId))
+    MainNavBottomItem(
+        id = bottomNavScreenList[0].id ?: -1,
+        text = stringResource(id = bottomNavScreenList[0].resourceId ?: -1)
+    )
 }

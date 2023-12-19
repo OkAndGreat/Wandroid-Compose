@@ -8,26 +8,23 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.wanandroid_compose.nav.BottomNavScreen
 import com.example.wanandroid_compose.nav.MainNavBottom
-import com.example.wanandroid_compose.nav.MainNavHost
+import com.example.wanandroid_compose.nav.NavigationHost
 import com.example.wanandroid_compose.nav.bottomNavScreenList
 import com.example.wanandroid_compose.nav.findFirstMatchIndex
 import com.example.wanandroid_compose.nav.navigateSingleTopTo
 import com.example.wanandroid_compose.ui.theme.WanandroidComposeTheme
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
-//TODO:迁移成MVI单向数据流
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,15 +60,22 @@ class MainActivity : ComponentActivity() {
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
 
-        val currentSelectIndex = bottomNavScreenList.findFirstMatchIndex(currentDestination?.route ?: "")
+        val currentSelectIndex =
+            bottomNavScreenList.findFirstMatchIndex(currentDestination?.route ?: "")
 
-        Scaffold(bottomBar = {
-            MainNavBottom(
-                selectedIndex = currentSelectIndex,
-                onBottomItemClicked = { _, screen -> navController.navigateSingleTopTo(screen.route) })
-        }) {
-            MainNavHost(navController, Modifier.padding(it))
+        if (isMainScreen(currentDestination?.route)) {
+            Scaffold(bottomBar = {
+                MainNavBottom(
+                    selectedIndex = currentSelectIndex,
+                    onBottomItemClicked = { _, screen -> navController.navigateSingleTopTo(screen.route) })
+            }) {
+                NavigationHost(navController, Modifier.padding(it))
+            }
+        } else {
+            NavigationHost(navController)
         }
     }
+
+    private fun isMainScreen(route: String?) = route == BottomNavScreen.HomeScreen.route
 
 }

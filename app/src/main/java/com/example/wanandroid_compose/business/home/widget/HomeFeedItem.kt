@@ -42,7 +42,8 @@ import java.util.Locale
 fun HomeFeedItem(
     modifier: Modifier = Modifier,
     item: HomeArticle? = null,
-    onItemClicked: () -> Unit
+    onItemClicked: (() -> Unit)? = null,
+    onCollectClicked: (() -> Unit)? = null
 ) {
     Box(
         modifier = modifier
@@ -51,7 +52,7 @@ fun HomeFeedItem(
             .height(100.dp)
             .fillMaxWidth()
             .clickable {
-                onItemClicked.invoke()
+                onItemClicked?.invoke()
             }
             .background(Color.White)
 
@@ -93,7 +94,13 @@ fun HomeFeedItem(
                 cornerRadius = 8.dp,
                 padding = 2.dp
             )
-            Icon(imageVector = Icons.Default.Favorite, contentDescription = "", tint = Color.Gray)
+            Icon(
+                imageVector = Icons.Default.Favorite,
+                contentDescription = "",
+                tint = Color.Gray,
+                modifier = Modifier.clickable {
+                    onCollectClicked?.invoke()
+                })
         }
     }
 }
