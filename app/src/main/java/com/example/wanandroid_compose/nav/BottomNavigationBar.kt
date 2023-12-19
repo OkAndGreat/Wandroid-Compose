@@ -66,7 +66,7 @@ fun MainNavBottomItem(
             painter = painterResource(id = id), contentDescription = "",
             tint = if (isSelected) Color.Blue else Color.Black,
             modifier = Modifier.size(
-                Dp(35F)
+                Dp(24F)
             )
         )
         Text(text = text, textAlign = TextAlign.Center, fontSize = 16.sp, color = if (isSelected) Color.Blue else Color.Black)

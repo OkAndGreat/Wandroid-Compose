@@ -6,4 +6,7 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+  <component name="UnlinkedProjectSettings">
+    <option name="enabledAutoLink" value="false" />
+  </component>
 </project>

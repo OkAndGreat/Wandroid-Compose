@@ -18,12 +18,9 @@ import com.example.wanandroid_compose.bean.homeArticle.HomeArticle
 
 @Composable
 fun HomeFeedListWidget(modifier: Modifier = Modifier, homeFeedList: List<HomeArticle>) {
-    val list by remember {
-        mutableStateOf(homeFeedList)
-    }
     LazyColumn(modifier.fillMaxWidth()) {
-        itemsIndexed(list) { _, item ->
-            HomeFeedItem {
+        itemsIndexed(homeFeedList) { _, item ->
+            HomeFeedItem(item = item) {
                 val url = item.link
                 //TODO:jump to target page
             }

@@ -1,5 +1,6 @@
 package com.example.wanandroid_compose.business.home
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
 import com.example.wanandroid_compose.base.BaseViewModel
@@ -19,9 +20,8 @@ class HomeViewModel : BaseViewModel() {
         const val TAG = "HomeViewModel"
     }
 
-    private val _homeFeedList = mutableStateOf<List<HomeArticle>?>(emptyList())
-    val homeFeedList
-        get() = _homeFeedList.value
+    private val _homeFeedList = mutableStateOf<List<HomeArticle>>(emptyList())
+    val homeFeedList: State<List<HomeArticle>> = _homeFeedList
 
     fun getHomeFeedList() {
         viewModelScope.launch(Dispatchers.Main) {
@@ -34,10 +34,10 @@ class HomeViewModel : BaseViewModel() {
             }, notifyLoading = {
 
             })
-
-            LogUtil.d(TAG, data.toString())
-            _homeFeedList.value = data?.datas
+            data?.datas?.let {
+                LogUtil.d(TAG, data.toString())
+                _homeFeedList.value = it
+            }
         }
-
     }
 }

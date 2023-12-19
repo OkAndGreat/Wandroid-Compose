@@ -23,7 +23,7 @@ object RetrofitManager {
     private const val CONNECT_TIME_OUT = 10 * 1000L
     private const val READ_TIMEOUT_MILLIS = 15 * 1000L
     private const val WRITE_TIMEOUT_MILLIS = 20 * 1000L
-    private const val PlayAndroid_URL = "https://example.com/"
+    private const val PlayAndroid_URL = "https://www.wanandroid.com"
 
     private val loggerIntercept = HttpLoggingInterceptor { }.apply {
 //        setlevel用来设置日志打印的级别，共包括了四个级别：NONE,BASIC,HEADER,BODY
