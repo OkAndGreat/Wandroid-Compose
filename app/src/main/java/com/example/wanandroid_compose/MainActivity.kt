@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,7 +14,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.wanandroid_compose.nav.BottomNavScreen
@@ -56,7 +59,10 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MainApp() {
+        val globalViewModel: GlobalViewModel? = GlobalViewModel.get(LocalContext.current)
+
         val navController = rememberNavController()
+        globalViewModel?.navController = navController
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
 
@@ -76,6 +82,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun isMainScreen(route: String?) = route == BottomNavScreen.HomeScreen.route
+    private val mainScreenRouteList =
+        mutableListOf<String>(BottomNavScreen.HomeScreen.route, BottomNavScreen.MineScreen.route)
+
+    private fun isMainScreen(route: String?) = mainScreenRouteList.contains(route)
 
 }

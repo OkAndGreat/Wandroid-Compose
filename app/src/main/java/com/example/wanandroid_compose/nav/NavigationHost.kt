@@ -33,8 +33,12 @@ fun NavigationHost(
             MineScreen()
         }
 
-        composable(route = BottomNavScreen.WebViewScreen.route) {
-            val webUrl = it.arguments?.getString("WebUrl") ?: return@composable
+        composable(
+            route = "${BottomNavScreen.WebViewScreen.route}/{${BottomNavScreen.WebViewScreen.urlStringArg}}",
+            arguments = BottomNavScreen.WebViewScreen.arguments
+        ) {
+            val webUrl = it.arguments?.getString(BottomNavScreen.WebViewScreen.urlStringArg)
+                ?: return@composable
             WebViewScreen(webUrl = webUrl)
         }
     }

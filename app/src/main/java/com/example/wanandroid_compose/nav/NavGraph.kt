@@ -2,6 +2,8 @@ package com.example.wanandroid_compose.nav
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.example.wanandroid_compose.R
 
 /**
@@ -13,7 +15,16 @@ sealed class BottomNavScreen(
     @StringRes val resourceId: Int? = -1,
     @DrawableRes val id: Int? = -1
 ) {
-    object HomeScreen : BottomNavScreen("home", R.string.bottom_home, R.mipmap.nav_home)
-    object MineScreen : BottomNavScreen("mine", R.string.bottom_mine, R.mipmap.nav_mine)
-    object WebViewScreen : BottomNavScreen("webview")
+    object HomeScreen : BottomNavScreen("home", R.string.bottom_home, R.mipmap.nav_home) {
+
+    }
+
+    object MineScreen : BottomNavScreen("mine", R.string.bottom_mine, R.mipmap.nav_mine) {
+
+    }
+
+    object WebViewScreen : BottomNavScreen("webview") {
+        const val urlStringArg = "UrlArg"
+        val arguments = listOf(navArgument(urlStringArg) { type = NavType.StringType })
+    }
 }

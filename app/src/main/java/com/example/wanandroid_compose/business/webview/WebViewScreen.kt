@@ -23,7 +23,6 @@ fun WebViewScreen(webUrl: String) {
             loadUrl(webUrl)
         }
     }, update = { webView ->
-
         webView.loadUrl(webUrl)
     }
     )

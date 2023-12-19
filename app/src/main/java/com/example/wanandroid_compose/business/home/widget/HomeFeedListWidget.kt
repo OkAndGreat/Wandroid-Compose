@@ -10,7 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.wanandroid_compose.GlobalViewModel
 import com.example.wanandroid_compose.bean.homeArticle.HomeArticle
+import com.example.wanandroid_compose.nav.BottomNavScreen
 import kotlinx.coroutines.launch
 
 
@@ -23,6 +26,8 @@ import kotlinx.coroutines.launch
 fun HomeFeedListWidget(modifier: Modifier = Modifier, homeFeedList: List<HomeArticle>) {
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
+
+    val globalViewModel: GlobalViewModel? = GlobalViewModel.get(context)
     LazyColumn(modifier.fillMaxWidth()) {
         itemsIndexed(homeFeedList) { _, item ->
             HomeFeedItem(item = item,
@@ -34,7 +39,8 @@ fun HomeFeedListWidget(modifier: Modifier = Modifier, homeFeedList: List<HomeArt
                 },
                 onItemClicked = {
                     val url = item.link
-
+                    val navController = globalViewModel?.navController
+                    navController?.navigate(BottomNavScreen.MineScreen.route)
                 })
         }
     }
