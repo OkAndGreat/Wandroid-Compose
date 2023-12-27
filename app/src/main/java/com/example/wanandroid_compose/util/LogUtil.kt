@@ -9,7 +9,6 @@ import com.example.wanandroid_compose.BuildConfig
  */
 object LogUtil {
 
-    const val TAG = "LogUtil"
     // 控制是否要输出log
     private var sIsRelease = BuildConfig.DEBUG == false
 

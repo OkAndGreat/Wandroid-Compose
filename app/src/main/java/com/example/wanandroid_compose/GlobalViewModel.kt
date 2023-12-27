@@ -3,6 +3,7 @@ package com.example.wanandroid_compose
 import android.app.Activity
 import android.content.Context
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
@@ -26,5 +27,7 @@ class GlobalViewModel : ViewModel() {
     }
 
     var navController: NavController? = null
+
+    var homeListState: LazyListState = LazyListState()
 
 }

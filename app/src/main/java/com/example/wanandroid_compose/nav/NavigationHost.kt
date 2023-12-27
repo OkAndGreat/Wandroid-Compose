@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import com.example.wanandroid_compose.business.home.widget.HomeScreen
 import com.example.wanandroid_compose.business.mine.widget.MineScreen
 import com.example.wanandroid_compose.business.webview.WebViewScreen
+import com.google.accompanist.navigation.animation.AnimatedNavHost
 
 /**
  * @author:ztaiwang
@@ -25,6 +26,7 @@ fun NavigationHost(
         startDestination = BottomNavScreen.HomeScreen.route,
         modifier = modifier
     ) {
+
         composable(route = BottomNavScreen.HomeScreen.route) {
             HomeScreen()
         }

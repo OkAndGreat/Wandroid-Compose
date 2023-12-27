@@ -1,9 +1,12 @@
 package com.example.wanandroid_compose.business.home.widget
 
+import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -28,7 +31,7 @@ fun HomeFeedListWidget(modifier: Modifier = Modifier, homeFeedList: List<HomeArt
     val context = LocalContext.current
 
     val globalViewModel: GlobalViewModel? = GlobalViewModel.get(context)
-    LazyColumn(modifier.fillMaxWidth()) {
+    LazyColumn(modifier.fillMaxWidth(), state = globalViewModel?.homeListState ?: rememberLazyListState()) {
         itemsIndexed(homeFeedList) { _, item ->
             HomeFeedItem(item = item,
                 onCollectClicked = {
@@ -39,8 +42,9 @@ fun HomeFeedListWidget(modifier: Modifier = Modifier, homeFeedList: List<HomeArt
                 },
                 onItemClicked = {
                     val url = item.link
+                    val encodeUrl = Uri.encode(url)
                     val navController = globalViewModel?.navController
-                    navController?.navigate(BottomNavScreen.MineScreen.route)
+                    navController?.navigate("${BottomNavScreen.WebViewScreen.route}/$encodeUrl")
                 })
         }
     }

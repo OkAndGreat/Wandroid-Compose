@@ -2,9 +2,11 @@ package com.example.wanandroid_compose
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,7 +28,9 @@ import com.example.wanandroid_compose.nav.bottomNavScreenList
 import com.example.wanandroid_compose.nav.findFirstMatchIndex
 import com.example.wanandroid_compose.nav.navigateSingleTopTo
 import com.example.wanandroid_compose.ui.theme.WanandroidComposeTheme
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlin.math.log
 
 class MainActivity : ComponentActivity() {
 
@@ -63,6 +67,7 @@ class MainActivity : ComponentActivity() {
 
         val navController = rememberNavController()
         globalViewModel?.navController = navController
+        Log.d("wzt", "MainApp: ${navController.hashCode()}")
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
 
