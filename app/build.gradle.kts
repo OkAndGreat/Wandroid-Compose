@@ -57,6 +57,7 @@ android {
 
 val accompanist_version = "0.30.0"
 val datastore_version = "1.0.0-alpha05"
+val paging_version = "3.2.1"
 
 dependencies {
 
@@ -95,4 +96,6 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-navigation-animation:0.32.0")
 
+    implementation ("androidx.paging:paging-runtime:$paging_version")
+    implementation ("androidx.paging:paging-compose:3.3.0-alpha02")
 }

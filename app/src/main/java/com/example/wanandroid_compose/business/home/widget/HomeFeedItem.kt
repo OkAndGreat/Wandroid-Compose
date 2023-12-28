@@ -44,7 +44,7 @@ import java.util.Locale
 fun HomeFeedItem(
     modifier: Modifier = Modifier,
     item: HomeArticle? = null,
-    onItemClicked: (() -> Unit)? = null,
+    onItemClicked: ((item: HomeArticle?) -> Unit)? = null,
     onCollectClicked: (() -> Unit)? = null
 ) {
     Box(
@@ -54,7 +54,7 @@ fun HomeFeedItem(
             .height(100.dp)
             .fillMaxWidth()
             .clickable {
-                onItemClicked?.invoke()
+                onItemClicked?.invoke(item)
             }
             .background(Color.White)
 

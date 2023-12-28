@@ -27,4 +27,6 @@ sealed class BottomNavScreen(
         const val urlStringArg = "UrlArg"
         val arguments = listOf(navArgument(urlStringArg) { type = NavType.StringType })
     }
+
+    object ScoreScreen : BottomNavScreen("score")
 }

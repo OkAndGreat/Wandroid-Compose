@@ -3,11 +3,18 @@ package com.example.wanandroid_compose.business.home
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
+import androidx.paging.cachedIn
 import com.example.wanandroid_compose.base.BaseViewModel
 import com.example.wanandroid_compose.bean.homeArticle.HomeArticle
 import com.example.wanandroid_compose.network.RetrofitManager
 import com.example.wanandroid_compose.util.LogUtil
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 
 /**
@@ -20,24 +27,15 @@ class HomeViewModel : BaseViewModel() {
         const val TAG = "HomeViewModel"
     }
 
-    private val _homeFeedList = mutableStateOf<List<HomeArticle>>(emptyList())
-    val homeFeedList: State<List<HomeArticle>> = _homeFeedList
+    val articleList = fetchHomeArticleList().cachedIn(viewModelScope)
 
-    fun getHomeFeedList() {
-        viewModelScope.launch(Dispatchers.Main) {
-            val data = requestWithCoroutine(responseBlock = {
-                val api = RetrofitManager.getRetrofitApi()
-                val call = api?.getHomeArticle(0)
-                call?.execute()?.body()
-            }, errorBlock = {
-
-            }, notifyLoading = {
-
-            })
-            data?.datas?.let {
-                LogUtil.d(TAG, data.toString())
-                _homeFeedList.value = it
+    fun fetchHomeArticleList(): Flow<PagingData<HomeArticle>> {
+        return Pager(
+            config = PagingConfig(pageSize = 30),
+            pagingSourceFactory = {
+                HomeArticleDataSource(RetrofitManager.getRetrofitApi())
             }
-        }
+        ).flow
     }
+
 }

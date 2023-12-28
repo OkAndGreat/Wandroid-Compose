@@ -17,5 +17,5 @@ interface API {
      * @return
      */
     @GET("/article/list/{page}/json")
-    fun getHomeArticle(@Path("page") page: Int): Call<BaseResponse<HomeArticleList>>?
+    suspend fun getHomeArticle(@Path("page") page: Int): BaseResponse<HomeArticleList>
 }

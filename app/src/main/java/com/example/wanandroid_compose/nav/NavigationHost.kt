@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.wanandroid_compose.business.home.widget.HomeScreen
 import com.example.wanandroid_compose.business.mine.widget.MineScreen
+import com.example.wanandroid_compose.business.score.widget.ScoreScreen
 import com.example.wanandroid_compose.business.webview.WebViewScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 
@@ -42,6 +43,10 @@ fun NavigationHost(
             val webUrl = it.arguments?.getString(BottomNavScreen.WebViewScreen.urlStringArg)
                 ?: return@composable
             WebViewScreen(webUrl = webUrl)
+        }
+
+        composable(route = BottomNavScreen.ScoreScreen.route) {
+            ScoreScreen()
         }
     }
 }
