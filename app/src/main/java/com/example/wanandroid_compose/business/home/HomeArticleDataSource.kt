@@ -20,12 +20,18 @@ class HomeArticleDataSource(private val api: API?) : PagingSource<Int, HomeArtic
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, HomeArticle> {
         val currentKey = params.key ?: 0
-        val rsp = api?.getHomeArticle(currentKey)
-        val datas = rsp?.data?.datas ?: listOf()
-        return LoadResult.Page(
-            data = datas,
-            prevKey = if (currentKey == 0) null else currentKey - 1,
-            nextKey = if (currentKey == rsp?.data?.pageCount) null else currentKey + 1
-        )
+        return try {
+            val rsp = api?.getHomeArticle(currentKey)
+                ?: throw IllegalStateException("API service is null")
+            val datas = rsp.data?.datas ?: listOf()
+            val endOfPaginationReached = currentKey + 1 >= (rsp.data?.pageCount ?: 0)
+            LoadResult.Page(
+                data = datas,
+                prevKey = if (currentKey == 0) null else currentKey - 1,
+                nextKey = if (endOfPaginationReached) null else currentKey + 1
+            )
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+        }
     }
 }

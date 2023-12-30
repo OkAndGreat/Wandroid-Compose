@@ -98,4 +98,6 @@ dependencies {
 
     implementation ("androidx.paging:paging-runtime:$paging_version")
     implementation ("androidx.paging:paging-compose:3.3.0-alpha02")
+    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanist_version")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 }
